@@ -22,7 +22,6 @@ export default {
        alert(error.message)
        const errorCode = error.code;
        const errorMessage = error.message;
-       // ..
      });
     }
   }
