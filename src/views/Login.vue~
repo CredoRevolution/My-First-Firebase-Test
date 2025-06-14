@@ -1,0 +1,43 @@
+<script>
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
+export default {
+  name: "Login",
+  data() {
+    return{
+      email: '',
+      password: ''
+    }
+  },
+  methods:{
+    loginUser(){
+      const auth = getAuth();
+      signInWithEmailAndPassword(auth, this.email, this.password)
+          .then((userCredential) => {
+            // Signed in
+            const user = userCredential.user;
+            this.$router.push('home')
+          })
+          .catch((error) => {
+            alert(error)
+            const errorCode = error.code;
+            const errorMessage = error.message;
+          });
+    }
+  }
+}
+</script>
+
+<template>
+<div class="login">
+  <h3>Sign In</h3>
+  <input type="text" placeholder="Email" v-model="email"> <br>
+  <input type="password" placeholder="Password" v-model="password"> <br>
+  <button @click="loginUser">Sign In</button>
+  <p> <router-link to="signup">Don't have an account?</router-link></p>
+</div>
+</template>
+
+<style scoped lang="scss">
+
+</style>
